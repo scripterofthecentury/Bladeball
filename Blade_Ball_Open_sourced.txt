@@ -745,7 +745,7 @@ end
 local Airflow = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/4lpaca-pin/Airflow/refs/heads/main/src/source.luau"))();
 
 local Window = Airflow:Init({
-	Name = "Celestia",
+	Name = "Not Hub",
 	Keybind = "LeftControl",
 	Logo = "http://www.roblox.com/asset/?id=94220348785476",
 });
