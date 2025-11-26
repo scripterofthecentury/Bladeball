@@ -69,40 +69,6 @@ local function performFirstPress(parryType)
     end
 end
 
-if not LPH_OBFUSCATED then
-    function LPH_JIT(Function) return Function end
-    function LPH_JIT_MAX(Function) return Function end
-    function LPH_NO_VIRTUALIZE(Function) return Function end
-end
-
-local PropertyChangeOrder = {}
-
-local HashOne
-local HashTwo
-local HashThree
-
-LPH_NO_VIRTUALIZE(function()
-    for Index, Value in next, getgc() do
-        if rawequal(typeof(Value), "function") and islclosure(Value) and getrenv().debug.info(Value, "s"):find("SwordsController") then
-            if rawequal(getrenv().debug.info(Value, "l"), 276) then
-                HashOne = getconstant(Value, 62)
-                HashTwo = getconstant(Value, 64)
-                HashThree = getconstant(Value, 65)
-            end
-        end 
-    end
-end)()
-
-
-LPH_NO_VIRTUALIZE(function()
-    for Index, Object in next, game:GetDescendants() do
-        if Object:IsA("RemoteEvent") and string.find(Object.Name, "\n") then
-            Object.Changed:Once(function()
-                table.insert(PropertyChangeOrder, Object)
-            end)
-        end
-    end
-end)()
 
 
 repeat
@@ -2166,4 +2132,5 @@ local Balls = workspace:WaitForChild('Balls')
 
 Balls.ChildRemoved:Connect(function()
     Phantom = false
+
 end)
